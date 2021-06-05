@@ -343,6 +343,72 @@ Route::get('/new/outputedit/{id}', function ($id) {
 })->name('newoutputedit');
 
 
+
+/*****************************************************************************************/
+
+Route::get('/used/input', function () {
+    return view('used.input',['datas'=>\App\Models\apinvoice::where('type','=','USED')->get()]);
+})->name('usedinput');
+
+Route::get('/used/inputadd', function () {
+    return view('used.inputadd');
+})->name('usedinputadd');
+
+Route::get('/used/inputedit/{id}', function ($id) {
+    return view('used.inputedit',['data'=>\App\Models\apinvoice::findOrFail($id)]); 
+})->name('usedinputedit');
+
+
+
+/*****************************************************************************************/
+
+Route::get('/used/output', function () {
+    return view('used.output',['datas'=>\App\Models\arinvoice::where('type','=','USED')->get()]);
+})->name('usedoutput');
+
+Route::get('/used/outputadd', function () {
+    return view('used.outputadd');
+})->name('usedoutputadd');
+
+
+Route::get('/used/outputedit/{id}', function ($id) {
+    return view('used.outputedit',['data'=>\App\Models\arinvoice::findOrFail($id)]); 
+})->name('usedoutputedit');
+
+
+/*****************************************************************************************/
+
+Route::get('/defective/input', function () {
+    return view('defective.input',['datas'=>\App\Models\apinvoice::where('type','=','DEFECTIVE')->get()]);
+})->name('defectiveinput');
+
+Route::get('/defective/inputadd', function () {
+    return view('defective.inputadd');
+})->name('defectiveinputadd');
+
+Route::get('/defective/inputedit/{id}', function ($id) {
+    return view('defective.inputedit',['data'=>\App\Models\apinvoice::findOrFail($id)]); 
+})->name('defectiveinputedit');
+
+
+
+/*****************************************************************************************/
+
+Route::get('/defective/output', function () {
+    return view('defective.output',['datas'=>\App\Models\arinvoice::where('type','=','DEFECTIVE')->get()]);
+})->name('defectiveoutput');
+
+Route::get('/defective/outputadd', function () {
+    return view('defective.outputadd');
+})->name('defectiveoutputadd');
+
+
+Route::get('/defective/outputedit/{id}', function ($id) {
+    return view('defective.outputedit',['data'=>\App\Models\arinvoice::findOrFail($id)]); 
+})->name('defectiveoutputedit');
+
+
+
  });
 
 });

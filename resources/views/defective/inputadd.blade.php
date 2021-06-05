@@ -40,10 +40,10 @@
                         Basic Form Elements
                     </div>
                     <div class="panel-body">  
-                        <form role="form" action="{{route('newoutputpostadd')}}" method="POST">
+                        <form role="form" action="{{route('newinputpostadd')}}" method="POST">
                         <div class="row">
                             <div class="col-lg-6">    
-                                <input name="type" value="NEW" type="hidden">     
+                                <input name="type" value="DEFECTIVE" type="hidden">     
                                 @csrf 
                                     <div class="form-group">
                                         <label>Phiếu</label>
@@ -75,7 +75,7 @@
                                         <label>Lý do</label>
                                         <select class="form-control" name="reason">
                                         <option></option>
-                                        @foreach (\App\Models\reason::where('is_input','=','0')->where('type','=','NEW')->get() as $item)
+                                        @foreach (\App\Models\reason::where('is_input','=','1')->where('type','=','DEFECTIVE')->get() as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                          @endforeach
                                          </select>
@@ -145,17 +145,6 @@
 </div>
 <!-- /#wrapper -->
 
-<div>
-
-@foreach(\App\Models\item::where('is_active','<>','0')->get() as $item)
-<datalist id="{{$item->id}}">
-@foreach(\App\Models\apinvoiceline::where('item_id','=',$item->id)->where('is_open','=',1)->where('type','=','NEW')->get('seri') as $seri)
-        <option value="{{$seri->seri}}" />
-@endforeach
-</datalist>
-</div>
-@endforeach
-
 @endsection
 
 @section('script')
@@ -181,7 +170,7 @@ var i=0;
     $("#item").change(function(){   
        i++;
 //alert('Selected value: ' + $(this).val());
-$("#table").append(' <tr > <input type="hidden" name="item['+ i +'][id]" value="'+$(this).val()+'"/> <td style="vertical-align: middle">'+$(this).val()+'</td>  <td style="vertical-align: middle">'+$(this).text()+'</td>  <td>  <input  class="form-control" list="'+$(this).val()+'" name="item['+i+'][seri]"></td> <td>  <input  class="form-control" name="item['+i+'][price]"></td> <td  style="vertical-align: middle" class="btnSelectstatus">Remove</td>  </tr>   ');
+$("#table").append(' <tr > <input type="hidden" name="item['+ i +'][id]" value="'+$(this).val()+'"/> <td style="vertical-align: middle">'+$(this).val()+'</td>  <td style="vertical-align: middle">'+$(this).text()+'</td>  <td>  <input  class="form-control" name="item['+i+'][seri]"></td> <td>  <input  class="form-control" name="item['+i+'][price]"></td> <td  style="vertical-align: middle" class="btnSelectstatus">Remove</td>  </tr>   ');
 $("#item").val('0');
 });
 

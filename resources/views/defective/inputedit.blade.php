@@ -40,56 +40,67 @@
                         Basic Form Elements
                     </div>
                     <div class="panel-body">  
-                        <form role="form" action="{{route('newoutputpostadd')}}" method="POST">
+                        <form    role="form" action="{{route('newinputpostedit')}}" method="POST">
                         <div class="row">
                             <div class="col-lg-6">    
-                                <input name="type" value="NEW" type="hidden">     
+                            <input name="type" value="DEFECTIVE" type="hidden">     
+                                <input name="apinvoice_id" value="{{$data->id}}" type="hidden">     
                                 @csrf 
                                     <div class="form-group">
                                         <label>Phiếu</label>
-                                        <input class="form-control" name="code">                                  
+                                        <input class="form-control"  value="{{$data->apinvoice_code}}" readonly>                                  
                                     </div>
                                     <div class="form-group">
                                         <label>Khách hàng</label>
-                                        <select class="form-control" name="customer">
+                                <!--      <select class="form-control" name="customer">
                                         <option></option>
                                         @foreach (\App\Models\customer::all() as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                          @endforeach
-                                         </select>
+                                         </select>-->
+                                         <input class="form-control"  value="{{$data->customer_name}}" readonly>                
                                     </div>
                                     <div class="form-group">
                                         <label>Nhân viên</label>
-                                        <select class="form-control" name="user">
+                                  <!--      <select class="form-control" name="user">
                                         <option></option>
                                         @foreach (\App\Models\user::where('role','<>','ADMIN')->get() as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                          @endforeach
-                                         </select>
+                                         </select>-->
+                                         <input class="form-control"  value="{{$data->user_name}}" readonly>                
+
                                     </div>
                                     <div class="form-group">
                                         <label>Ghi chú</label>
-                                        <input class="form-control" name="note">
+                                        <input class="form-control"  value="{{$data->user_note}}" readonly>                
+
                                     </div>
                                     <div class="form-group">
                                         <label>Lý do</label>
-                                        <select class="form-control" name="reason">
+                                    <!--    <select class="form-control" name="reason">
                                         <option></option>
-                                        @foreach (\App\Models\reason::where('is_input','=','0')->where('type','=','NEW')->get() as $item)
+                                        @foreach (\App\Models\reason::where('is_input','=','1')->where('type','=','DEFECTIVE')->get() as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                          @endforeach
-                                         </select>
+                                         </select>-->
+                                         <input class="form-control"  value="{{$data->reason_name}}" readonly>                
+
                                     </div>
                                     <div class="form-group">
                                         <label>Tiền tệ</label>
-                                        <select class="form-control" name="currency">
+                                <!--        <select class="form-control" name="currency">
                                         <option>VND</option>
                                         <option>$</option>                               
-                                         </select>
+                                         </select>-->
+                                         <input class="form-control"  value="{{$data->currency}}" readonly>                
+
                                     </div>
                                     <div class="form-group">
                                         <label>Date</label>
-                                        <input class="form-control" name="date" type="date">
+                                     <!--   <input class="form-control" name="date" type="date"> -->
+                                     <input class="form-control"  value="{{$data->date}}" readonly>                
+
                                     </div>     
                                                                                                                                                       
                                    <!-- <div class="form-group">
@@ -107,7 +118,7 @@
                             </div>
                             <!-- /.col-lg-6 (nested) -->
                            <div class="col-lg-6">
-                               <div class="form-group">            
+                          <!--     <div class="form-group">            
                                      <label>Item</label>                       
                                         <select class="form-control" id="item">
                                         <option value="0"></option>
@@ -115,11 +126,23 @@
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                          @endforeach
                                          </select>
-                                </div>
+                                </div>-->
                            
                                <div class="table-responsive">
                                         <table class="table table-striped table-bordered table-hover">                                         
                                             <tbody id="table">
+
+                                            @foreach(\App\Models\apinvoiceline::where('apinvoice_id','=',$data->id)->get() as $key => $seri)
+
+                                            <tr > 
+                                            <input type="hidden" @if($seri->is_open==1) name="item[{{$key}}][id]" @else readonly  @endif value="{{$seri->id}}"/>
+                                             <td style="vertical-align: middle" >{{$seri->item_id}}</td> 
+                                              <td style="vertical-align: middle" >{{$seri->item_name}}</td> 
+                                               <td>  <input  class="form-control" @if($seri->is_open==1) name="item[{{$key}}][seri]" @else readonly @endif value="{{$seri->seri}}"></td> 
+                                               <td>  <input  class="form-control" @if($seri->is_open==1) name="item[{{$key}}][price]" @else readonly @endif value="{{$seri->price}}"></td>
+                                          <!--      <td  style="vertical-align: middle" class="btnSelectstatus">Remove</td>  -->
+                                                </tr> 
+                                            @endforeach
                                                                                  
                                             </tbody>
                                         </table>
@@ -145,17 +168,6 @@
 </div>
 <!-- /#wrapper -->
 
-<div>
-
-@foreach(\App\Models\item::where('is_active','<>','0')->get() as $item)
-<datalist id="{{$item->id}}">
-@foreach(\App\Models\apinvoiceline::where('item_id','=',$item->id)->where('is_open','=',1)->where('type','=','NEW')->get('seri') as $seri)
-        <option value="{{$seri->seri}}" />
-@endforeach
-</datalist>
-</div>
-@endforeach
-
 @endsection
 
 @section('script')
@@ -174,30 +186,6 @@
 <!-- Custom Theme JavaScript -->
 <script src="{{asset('startmin-master/js/startmin.js')}}"></script>
 
-<script>
-     $(document).ready(function() {
-      
-var i=0;
-    $("#item").change(function(){   
-       i++;
-//alert('Selected value: ' + $(this).val());
-$("#table").append(' <tr > <input type="hidden" name="item['+ i +'][id]" value="'+$(this).val()+'"/> <td style="vertical-align: middle">'+$(this).val()+'</td>  <td style="vertical-align: middle">'+$(this).text()+'</td>  <td>  <input  class="form-control" list="'+$(this).val()+'" name="item['+i+'][seri]"></td> <td>  <input  class="form-control" name="item['+i+'][price]"></td> <td  style="vertical-align: middle" class="btnSelectstatus">Remove</td>  </tr>   ');
-$("#item").val('0');
-});
 
-$("#table").on('click','.btnSelectstatus',function(){
-         // get the current row
-         var currentRow=$(this).closest("tr"); 
-       
-         currentRow.remove();
-
-
-
-       
-    });
-
-
-});
-</script>
 
 @endsection

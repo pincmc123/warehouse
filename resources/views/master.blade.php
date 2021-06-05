@@ -168,10 +168,10 @@
                                 <a href="#"><i class="fa fa-files-o fa-fw"></i>USED<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="blank.html">INPUT</a>
+                                        <a href="{{route('usedinput')}}">INPUT</a>
                                     </li>
                                     <li>
-                                        <a href="login.html">OUTPUT</a>
+                                        <a href="{{route('usedoutput')}}">OUTPUT</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
@@ -180,10 +180,10 @@
                                 <a href="#"><i class="fa fa-files-o fa-fw"></i>DEFECTIVE<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="blank.html">INPUT</a>
+                                        <a href="{{route('defectiveinput')}}">INPUT</a>
                                     </li>
                                     <li>
-                                        <a href="login.html">OUTPUT</a>
+                                        <a href="{{route('defectiveoutput')}}">OUTPUT</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
