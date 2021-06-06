@@ -306,8 +306,9 @@ Route::post('/new/outputadd', function (Request $data) {
 
     foreach($data->item as $value)
     {
+            
         $arline=\App\Models\arinvoiceline::create([
-            'guar_date' => $value['date'],
+            'guar_end' => $value['date']??'',
 
             'seri' => $value['seri'],
             'item_id'=>$value['id'],
