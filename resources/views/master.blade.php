@@ -161,6 +161,9 @@
                                     <li>
                                         <a href="{{route('newoutput')}}">OUTPUT</a>
                                     </li>
+                                    <li>
+                                        <a href="{{route('newseri')}}">SERI</a>
+                                    </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
                             </li>

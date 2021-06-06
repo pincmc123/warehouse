@@ -306,7 +306,7 @@ Route::post('/new/outputadd', function (Request $data) {
 
     foreach($data->item as $value)
     {
-        $apline=\App\Models\arinvoiceline::create([
+        $arline=\App\Models\arinvoiceline::create([
 
             'seri' => $value['seri'],
             'item_id'=>$value['id'],
@@ -332,7 +332,7 @@ Route::post('/new/outputadd', function (Request $data) {
             'modify_by'  => Auth::user()->name
         ]);
 
-        \App\Models\arinvoiceline::where('seri','=',$apline->seri)->where('is_open','=',1)->update(['is_open' => 0]);
+        \App\Models\apinvoiceline::where('seri','=',$arline->seri)->where('is_open','=',1)->update(['is_open' => 0,'arline_id'=>$arline->id]);
     }
 
     return redirect()->route('newoutput')->with('status','Cập nhật thành công !!!');
@@ -341,6 +341,11 @@ Route::post('/new/outputadd', function (Request $data) {
 Route::get('/new/outputedit/{id}', function ($id) {
     return view('new.outputedit',['data'=>\App\Models\arinvoice::findOrFail($id)]); 
 })->name('newoutputedit');
+
+
+Route::get('/new/seri', function () {
+    return view('new.seri',['datas'=>\App\Models\apinvoiceline::where('type','NEW')->get()]); 
+})->name('newseri');
 
 
 
