@@ -70,7 +70,7 @@
                                                     <td>{{$data->user_note}}</td>
                                                     <td>{{$data->total}}</td>
                                                     <td>{{$data->reason_name}}</td>
-                                                    <td>@if($data->is_active == 1) Active @else Inactive @endif</td>
+                                                    <td>{{$data->date}}</td>
                                                     <td>{{$data->modify_by}}</td>
                                                     <td><a href="{{route('usedinputedit',$data->id)}}">Edit</a></td>
                                                 </tr>

@@ -40,7 +40,7 @@
                         Basic Form Elements
                     </div>
                     <div class="panel-body">  
-                        <form role="form" action="{{route('newinputpostadd')}}" method="POST">
+                        <form role="form" action="{{route('newinputpostadd')}}" autocomplete="off" method="POST" autocomplete="off">
                         <div class="row">
                             <div class="col-lg-6">    
                                 <input name="type" value="NEW" type="hidden">     
@@ -170,7 +170,7 @@ var i=0;
     $("#item").change(function(){   
        i++;
 //alert('Selected value: ' + $(this).val());
-$("#table").append(' <tr > <input type="hidden" name="item['+ i +'][id]" value="'+$(this).val()+'"/> <td style="vertical-align: middle">'+$(this).val()+'</td>  <td style="vertical-align: middle">'+$(this).text()+'</td>  <td>  <input  class="form-control" name="item['+i+'][seri]"></td> <td>  <input  class="form-control" name="item['+i+'][price]"></td> <td  style="vertical-align: middle" class="btnSelectstatus">Remove</td>  </tr>   ');
+$("#table").append(' <tr > <input  type="hidden" name="item['+ i +'][id]" value="'+$(this).val()+'"/> <td style="vertical-align: middle">'+$(this).val()+'</td>  <td style="vertical-align: middle">'+$(this).text()+'</td>  <td>  <input  class="form-control" name="item['+i+'][seri]"></td> <td>  <input  class="form-control" name="item['+i+'][price]"></td> <td  style="vertical-align: middle" class="btnSelectstatus">Remove</td>  </tr>   ');
 $("#item").val('0');
 });
 

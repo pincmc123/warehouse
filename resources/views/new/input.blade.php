@@ -70,7 +70,7 @@
                                                     <td>{{$data->user_note}}</td>
                                                     <td>{{$data->total}}</td>
                                                     <td>{{$data->reason_name}}</td>
-                                                    <td>@if($data->is_active == 1) Active @else Inactive @endif</td>
+                                                    <td>{{$data->date}}</td>
                                                     <td>{{$data->modify_by}}</td>
                                                     <td><a href="{{route('newinputedit',$data->id)}}">Edit</a></td>
                                                 </tr>
@@ -95,7 +95,7 @@
                         <div class="col-lg-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Kitchen Sink
+                                    ĐÃ NHẬP
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
@@ -104,30 +104,21 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>First Name</th>
-                                                    <th>Last Name</th>
-                                                    <th>Username</th>
+                                                    <th>Tên sản phẩm</th>
+                                                    <th>Đã nhập</th>
+                                                    <th>Đã xuất</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+
+                                            @foreach (\App\Models\item::all() as $item)
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                </tr>
+                                                    <td>{{$item->code}}</td>
+                                                    <td>{{$item->name}}</td>
+                                                    <td>{{\App\Models\apinvoiceline::where('type','=','NEW')->where('item_id',$item->id)->count()}}</td>
+                                                    <td>{{\App\Models\apinvoiceline::where('type','=','NEW')->where('item_id',$item->id)->where('is_open','1')->count()}}</td>
                                                 <tr>
-                                                    <td>2</td>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter</td>
-                                                </tr>
+                                              @endforeach                                      
                                             </tbody>
                                         </table>
                                     </div>

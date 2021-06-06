@@ -40,7 +40,7 @@
                         Basic Form Elements
                     </div>
                     <div class="panel-body">  
-                        <form    role="form" action="{{route('newinputpostedit')}}" method="POST">
+                        <form    role="form" action="{{route('newinputpostedit')}}" method="POST" autocomplete="off">
                         <div class="row">
                             <div class="col-lg-6">    
                             <input name="type" value="DEFECTIVE" type="hidden">     
