@@ -49,8 +49,8 @@
                                                 <tr>
                                                 <th>Id</th>
                                                     <th>Seri</th>
-                                               <th>Ngày nhập</th>       <th>Lý do nhập</th>
-                                                  
+                                                    <th>Ngày nhập</th>   
+                                                    <th>Lý do nhập</th>                                                 
                                                     <th>Ngày xuất</th>
                                                     <th>Lý do xuất</th>
 

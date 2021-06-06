@@ -181,7 +181,7 @@ var i=0;
     $("#item").change(function(){   
        i++;
 //alert('Selected value: ' + $(this).val());
-$("#table").append(' <tr > <input type="hidden" name="item['+ i +'][id]" value="'+$(this).val()+'"/> <td style="vertical-align: middle">'+$(this).val()+'</td>  <td style="vertical-align: middle">'+$(this).text()+'</td>  <td>  <input  class="form-control" list="'+$(this).val()+'" name="item['+i+'][seri]"></td> <td>  <input  class="form-control" name="item['+i+'][price]"></td> <td  style="vertical-align: middle" class="btnSelectstatus">Remove</td>  </tr>   ');
+$("#table").append(' <tr > <input  type="hidden" name="item['+ i +'][id]" value="'+$(this).val()+'"/> <td style="vertical-align: middle">'+$(this).val()+'</td>  <td style="vertical-align: middle">'+$(this).find('option:selected').text()+'</td>  <td>  <input  class="form-control" name="item['+i+'][seri]"></td> <td>  <input  class="form-control" name="item['+i+'][price]"></td> <td  style="vertical-align: middle" class="btnSelectstatus">Remove</td>  </tr>   ');
 $("#item").val('0');
 });
 
