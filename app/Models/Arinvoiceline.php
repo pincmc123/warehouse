@@ -28,6 +28,7 @@ class Arinvoiceline extends Model
         'modify_by',
         'is_open',
         'arline_id',
+        'guar_date',
       
     ];
 }
